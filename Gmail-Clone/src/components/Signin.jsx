@@ -1,26 +1,31 @@
-import React,{useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import "./Signin.css";
 import img from "../assets/images/logo.png";
 import img2 from "../assets/images/google.png";
 import { signInWithPopup } from "firebase/auth";
 import { googelprovider, auth } from "../firebase/setup";
 import { toast } from "react-toastify";
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
 
 const Signin = () => {
   const navigate=useNavigate();
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      navigate("/");
-    }, 6000);
+  const [userSignedIn, setUserSignedIn] = useState(false);
 
-    return () => clearTimeout(timeout);
-  }, [navigate]);
+  useEffect(() => {
+    if (userSignedIn) {
+      const timeout = setTimeout(() => {
+        navigate("/");
+      }, 4000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [navigate, userSignedIn]);
+
   const googleSignin = async () => {
     try {
       await signInWithPopup(auth, googelprovider);
       toast.success("Signed Up successfully");
-      navigate('/')
+      setUserSignedIn(true); // Set the userSignedIn state to true after signing in
     } catch (error) {
       console.log(error);
     }
