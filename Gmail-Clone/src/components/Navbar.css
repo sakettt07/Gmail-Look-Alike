@@ -1,0 +1,8 @@
+.search{
+    display: none;
+}
+@media(min-width:420px) {
+    .search{
+        display: block;
+    }
+}
