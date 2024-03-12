@@ -5,10 +5,10 @@ import img2 from "../assets/images/user.png";
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CgMenuGridO } from "react-icons/cg";
-import { FaUserCircle } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import { auth } from '../firebase/setup';
 import "./Navbar.css";
+import Profile from './Profile';
 
 const Navbar = () => {
   return (
@@ -29,7 +29,8 @@ const Navbar = () => {
         {auth.currentUser ? (
           <img title='User' src={auth.currentUser.photoURL} className='w-9 rounded-full cursor-pointer' alt="" />
         ) : (
-          <img title='User' src={img2} className='w-12 rounded-full cursor-pointer' alt="" />
+          // <img title='User' src={img2} className='w-12 rounded-full cursor-pointer' alt="" />
+          <Profile />
         )}
       </div>
     </div>

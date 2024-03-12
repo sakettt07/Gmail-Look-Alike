@@ -27,7 +27,7 @@ const Sidebar = () => {
   const [activenav, setActiveNav] = useState(0);
 
   return (
-    <div className="  w-80 h-screen bg-[#f6f7fc] ">
+    <div className=" w-80 h-[100%] bg-[#f6f7fc] ">
       <div className="flex bg-[#C2e7ff] gap-3 items-center w-[142.2px] p-[16px] ml-2 rounded-2xl">
         <HiPencil className="text-[25px]" />
         <h3 className="font-semibold text-[15px]">Compose</h3>
