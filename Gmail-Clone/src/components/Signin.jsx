@@ -14,8 +14,8 @@ const Signin = () => {
   useEffect(() => {
     if (userSignedIn) {
       const timeout = setTimeout(() => {
-        navigate("/");
-      }, 4000);
+        navigate("/home");
+      }, 3500);
 
       return () => clearTimeout(timeout);
     }

@@ -1,16 +1,21 @@
 import React from 'react';
 import { IoMenu } from "react-icons/io5";
 import img1 from "../assets/images/logo.png";
-import img2 from "../assets/images/user.png";
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CgMenuGridO } from "react-icons/cg";
 import { IoMdSearch } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 import { auth } from '../firebase/setup';
 import "./Navbar.css";
 import Profile from './Profile';
+import {useNavigate} from "react-router-dom"
 
 const Navbar = () => {
+  const navigate=useNavigate();
+  const signin=()=>{
+  navigate('/');
+  }
   return (
     <div className='bg-[#f6f7fc] w-full p-3 pl-5 pr-8 items-center flex justify-between'>
       <div className='flex items-center gap-1'>
@@ -27,10 +32,9 @@ const Navbar = () => {
         <IoSettingsOutline title='Settings' className='text-[25px] hidden md:flex cursor-pointer font-semibold text-[#5f6368]' />
         <CgMenuGridO title='Explore more' className='text-[28px] hidden md:flex cursor-pointer font-semibold text-[#5f6368]' />
         {auth.currentUser ? (
-          <img title='User' src={auth.currentUser.photoURL} className='w-9 rounded-full cursor-pointer' alt="" />
-        ) : (
-          // <img title='User' src={img2} className='w-12 rounded-full cursor-pointer' alt="" />
           <Profile />
+        ) : (
+          <FaUserCircle onClick={signin} className='text-[28px] cursor-pointer' />
         )}
       </div>
     </div>
