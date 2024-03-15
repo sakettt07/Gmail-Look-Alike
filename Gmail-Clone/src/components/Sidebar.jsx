@@ -39,7 +39,7 @@ const Sidebar = () => {
             onClick={() => setActiveNav(index)}
             className={`flex gap-5 pb-2 p-1 pl-7 items-center cursor-pointer ${
               activenav === index
-                ? "bg-[#d3e3fd] "
+                ? "bg-[#d3e3fd] 
                 : "hover:bg-[#d9d9d9]"
             } rounded-r-3xl`}
           >
