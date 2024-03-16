@@ -3,9 +3,10 @@ import "./Signin.css";
 import img from "../assets/images/logo.png";
 import img2 from "../assets/images/google.png";
 import { signInWithPopup } from "firebase/auth";
-import { googelprovider, auth } from "../firebase/setup";
+import { googelprovider, auth, database } from "../firebase/setup";
 import { toast } from "react-toastify";
 import {useNavigate} from "react-router-dom";
+import { setDoc,doc } from "firebase/firestore";
 
 const Signin = () => {
   const navigate=useNavigate();
@@ -15,16 +16,31 @@ const Signin = () => {
     if (userSignedIn) {
       const timeout = setTimeout(() => {
         navigate("/home");
-      }, 3500);
+      }, 3100);
 
       return () => clearTimeout(timeout);
     }
   }, [navigate, userSignedIn]);
 
+  const addUser=async()=>{
+    const userDoc=doc(database,"Users",`${auth.currentUser?.email}`)
+    try {
+      await setDoc(userDoc,{
+        username:auth.currentUser?.displayName,
+        email:auth.currentUser?.email,
+        id:auth.currentUser?.uid
+
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const googleSignin = async () => {
     try {
       await signInWithPopup(auth, googelprovider);
       toast.success("Signed Up successfully");
+      addUser()
       setUserSignedIn(true); // Set the userSignedIn state to true after signing in
     } catch (error) {
       console.log(error);
