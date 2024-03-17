@@ -1,12 +1,13 @@
 import  React, {useState} from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { HiPencil } from "react-icons/hi";
 import { TextField } from "@mui/material";
 import { addDoc, collection, doc } from "firebase/firestore";
 import { database } from "../firebase/setup";
+import { auth } from "../firebase/setup";
 
 
 export default function Message() {
@@ -18,13 +19,30 @@ export default function Message() {
   const [mail,setMail]=useState("");
   const [message,setMessage]=useState("");
 
-  const sendMail=async()=>{
-    const userDoc=doc(database,"Users",`${mail}`);
-    const messageRef=collection(userDoc,"Inbox")
+
+  //the below function will save the mail for the reciever.
+  const send=async()=>{
+    const userDoc=doc(database,"Users",`${auth.currentUser?.email}`);
+    const messageRef=collection(userDoc,"Send")
     try {
         await addDoc(messageRef,{
             email:message
         });
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
+  // the below function will save the mail for the sender in inbox collection
+  const inbox=async()=>{
+    const userDoc=doc(database,"Users",`${mail}`);
+    const messageRef=collection(userDoc,"Inbox")
+    try {
+        await addDoc(messageRef,{
+            email:message,
+            sender:auth.currentUser?.displayName
+        });
+        send()
     } catch (error) {
         console.log(error);
     }
@@ -54,7 +72,7 @@ export default function Message() {
           <br />
           <TextField onChange={(e)=>setMessage(e.target.value)} multiline rows={10} className="w-full border-none" />
           </div>
-          <button onClick={sendMail} className="bg-[#0B57D0] mt-3 p-3 rounded-full pl-11 pr-11 text-white font-semibold">Send</button>
+          <button onClick={inbox} className="bg-[#0B57D0] mt-3 p-3 rounded-full pl-11 pr-11 text-white font-semibold">Send</button>
         </Box>
       </Modal>
     </div>
