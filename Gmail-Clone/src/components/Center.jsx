@@ -49,9 +49,9 @@ const Center = (props) => {
                   <h4 className="text-[16px]  md:text-[17px] font-semibold">
                     {data.sender}
                   </h4>
-                  <h5 className="pl-10  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
+                  <p className="pl-10 truncate  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
                     {data.email}
-                  </h5>
+                  </p>
                   <MdOutlineDeleteOutline
                     className={` text-[16px] md:text-[20px] cursor-pointer md:mr-12 ${
                       hoveredItem === index ? "visible" : "invisible"
@@ -74,9 +74,9 @@ const Center = (props) => {
                   <h4 className="text-[16px] md:text-[17px] font-semibold">
                     {data.sender}
                   </h4>
-                  <h5 className="pl-10  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
+                  <p className="pl-10 truncate  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
                     {data.email}
-                  </h5>
+                  </p>
                   <MdOutlineDeleteOutline
                     className={` text-[16px] md:text-[20px] cursor-pointer md:mr-12 ${
                       hoveredItem === index ? "visible" : "invisible"
