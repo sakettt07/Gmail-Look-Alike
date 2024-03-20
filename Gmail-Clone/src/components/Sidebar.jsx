@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { HiPencil } from "react-icons/hi";
 import { MdInbox } from "react-icons/md";
 import { MdOutlineStarRate } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -12,47 +11,55 @@ const Sidebar = (props) => {
     {
       name: "Inbox",
       icon: <MdInbox className="text-[18px] font-semibold" />,
-      onClick:()=>props.setSubstate("Inbox"),
+      onClick: () => handleNavLinkClick(0, "Inbox"),
     },
     {
       name: "Starred",
       icon: <MdOutlineStarRate className="text-[18px] font-semibold" />,
+      onClick: () => handleNavLinkClick(1, "Starred"),
     },
     {
       name: "Snoozed",
       icon: <TbClock className="text-[18px] font-semibold" />,
+      onClick: () => handleNavLinkClick(2, "Snoozed"),
     },
     {
       name: "Bin",
       icon: <RiDeleteBin6Line className="text-[18px] font-semibold" />,
+      onClick: () => handleNavLinkClick(3, "Bin"),
     },
     {
       name: "Send",
       icon: <IoSendSharp className="text-[16px] font-semibold" />,
-      onClick:()=>props.setSubstate("Send"),
+      onClick: () => handleNavLinkClick(4, "Send"),
     },
   ];
-  const [activenav, setActiveNav] = useState(0);
+
+  const [activeNav, setActiveNav] = useState(0);
+
+  const handleNavLinkClick = (index, substate) => {
+    setActiveNav(index);
+    props.setSubstate(substate);
+  };
 
   return (
-    <div className="hidden md:block w-80 h-[100%] bg-[#f6f7fc] ">
+    <div className="md:w-80 h-[100%] bg-[#f6f7fc]">
+      <div className="hidden md:block">
       <Message />
+      </div>
       <div className="w-62 pt-2 h-64 mt-2">
         {navLinks.map((item, index) => (
           <div
             key={index}
-            onClick={() => {
-              setActiveNav(index);
-              if (item.onClick) item.onClick();
-            }}
-            className={`flex gap-5 pb-2 p-1 pl-7 items-center cursor-pointer ${
-              activenav === index
-                ? "bg-[#d3e3fd] "
+            onClick={item.onClick}
+            className={`flex gap-5 pb-2 p-1 pl-2 md:pl-7 items-center cursor-pointer ${
+              activeNav === index
+                ? "bg-[#d3e3fd] text-[#041e49] font-semibold"
                 : "hover:bg-[#d9d9d9]"
             } rounded-r-3xl`}
           >
             {item.icon}
-            <h3 className={activenav === index ? "text-[#041e49] font-semibold" : ""}>{item.name}</h3>
+            <h3 className="hidden md:block">{item.name}</h3>
           </div>
         ))}
       </div>

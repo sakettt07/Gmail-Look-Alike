@@ -1,13 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineStarRate } from "react-icons/md";
 import { GrFormRefresh } from "react-icons/gr";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection,deleteDoc,doc, setDoc, getDocs } from "firebase/firestore";
 import { auth, database } from "../firebase/setup";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+
 
 const Center = (props) => {
   const [maildata, setMaildata] = useState([]);
   const [hoveredItem,setHoveredItem]=useState(null);
+
+  const moveMailToBin = async (data) => {
+    const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
+    const binCollection = collection(userDoc, "Bin");
+    try {
+      await setDoc(doc(binCollection), { ...data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+const deleteMail=async(data)=>{
+  const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
+    const messageDoc = doc(userDoc,"Inbox",`${data.id}`);
+  try {
+    await moveMailToBin(data);
+    await deleteDoc(messageDoc);
+    console.log("mail is deltedd");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 
   const getMail = async () => {
     const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
@@ -19,7 +45,7 @@ const Center = (props) => {
       const data = await getDocs(messageDoc);
       const filteredData = data.docs.map((doc) => ({
         ...doc.data(),
-        id: data.id,
+        id: doc.id,
       }));
       setMaildata(filteredData);
     } catch (error) {
@@ -49,10 +75,11 @@ const Center = (props) => {
                   <h4 className="text-[16px]  md:text-[17px] font-semibold">
                     {data.sender}
                   </h4>
-                  <p className="pl-10 truncate  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
+                  <p className="pl-10  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
                     {data.email}
                   </p>
                   <MdOutlineDeleteOutline
+                  onClick={()=>deleteMail(data)}
                     className={` text-[16px] md:text-[20px] cursor-pointer md:mr-12 ${
                       hoveredItem === index ? "visible" : "invisible"
                     }`}
@@ -74,10 +101,11 @@ const Center = (props) => {
                   <h4 className="text-[16px] md:text-[17px] font-semibold">
                     {data.sender}
                   </h4>
-                  <p className="pl-10 truncate  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
+                  <p className="pl-10 text-[12px] md:text-[18px] md:pl-16 text-gray-500">
                     {data.email}
                   </p>
                   <MdOutlineDeleteOutline
+                  onClick={()=>deleteMail(data)}
                     className={` text-[16px] md:text-[20px] cursor-pointer md:mr-12 ${
                       hoveredItem === index ? "visible" : "invisible"
                     }`}
