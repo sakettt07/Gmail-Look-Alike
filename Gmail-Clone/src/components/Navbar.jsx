@@ -10,18 +10,12 @@ import { auth } from '../firebase/setup';
 import "./Navbar.css";
 import Profile from './Profile';
 import { useNavigate } from "react-router-dom";
-import Sidebar from './Sidebar';
 
 const Navbar = (props) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const signin = () => {
     navigate('/');
-  }
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
   }
 
   return (

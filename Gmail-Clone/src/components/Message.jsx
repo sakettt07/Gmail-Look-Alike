@@ -11,7 +11,7 @@ import { auth } from "../firebase/setup";
 
 
 export default function Message() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -26,8 +26,9 @@ export default function Message() {
     const messageRef=collection(userDoc,"Send")
     try {
         await addDoc(messageRef,{
-            email:message
+            email:message,
         });
+        setMessage("");
     } catch (error) {
         console.log(error);
     }
@@ -40,8 +41,10 @@ export default function Message() {
     try {
         await addDoc(messageRef,{
             email:message,
-            sender:auth.currentUser?.displayName
+            sender:auth.currentUser?.displayName,
         });
+        setMail("");
+        setMessage("");
         send()
     } catch (error) {
         console.log(error);
@@ -72,7 +75,7 @@ export default function Message() {
           <br />
           <TextField onChange={(e)=>setMessage(e.target.value)} multiline rows={10} className="w-full border-none" />
           </div>
-          <button onClick={inbox} className="bg-[#0B57D0] mt-3 p-3 rounded-full pl-11 pr-11 text-white font-semibold">Send</button>
+          <button onClick={inbox} className="bg-[#0B57D0] hover:bg-[#28354a] mt-3 p-3 rounded-full pl-11 pr-11 text-white font-semibold">Send</button>
         </Box>
       </Modal>
     </div>
