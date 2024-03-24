@@ -48,18 +48,18 @@ const Profile=()=> {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <h4 className='text-center text-zinc-800 font-semibold'>
+        <Box className="absolute bg-[#d5e4f9] w-[14rem] top-[10%] left-[20%] h-[12rem] md:w-[28vw] md:h-[23vw] md:top-[10%] md:left-[68%] rounded-2xl p-3">
+          <h4 className='text-center text-[12px] md:text-[20px] text-zinc-800 font-semibold'>
           {auth.currentUser ? auth.currentUser.email : 'abc@gmail.com'}
           </h4>
-          <img title='User' src={auth.currentUser ? auth.currentUser.photoURL : img2} className='w-24 ml-32 mt-7 rounded-full cursor-pointer' alt="" />
-          <h2 id="modal-modal-description" className='text-center text-[17px] font-semibold mt-1' sx={{ mt: 2 }}>
+          <img title='User' src={auth.currentUser ? auth.currentUser.photoURL : img2} className='w-10 md:w-24 ml-20 md:ml-[9.6rem] mt-3 md:mt-7 rounded-full cursor-pointer' alt="" />
+          <h2 id="modal-modal-description" className='text-center text-[14px] md:text-[17px] font-semibold mt-1' sx={{ mt: 2 }}>
             Hi,{auth.currentUser?.displayName}!
           </h2>
-          <div className='mt-5 ml-32 gap-4'>
-          <button onClick={handleSignout} className='bg-white p-4 ml-2 rounded-2xl hover:bg-orange-100 flex justify-center items-center gap-3'><LuLogOut /> Logout</button>
+          <div className='mt-2 ml-12 md:mt-5 md:ml-[9.4rem] gap-4'>
+          <button onClick={handleSignout} className='bg-white p-2 md:p-4 ml-2 rounded-2xl hover:bg-orange-100 flex justify-center items-center gap-3'><LuLogOut /> Logout</button>
           </div>
-          <p className='text-center font-semibold mt-6 text-[13px]'>Privacy policy .  Terms of service</p>
+          <p className='text-center font-semibold md:mt-6 mt-2 text-[11px] md:text-[13px]'>Privacy policy .  Terms of service</p>
         </Box>
       </Modal>
     </div>

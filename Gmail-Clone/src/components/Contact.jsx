@@ -2,11 +2,10 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import taskss from "../assets/images/tasks.png";
-
+import contact from "../assets/images/contact.png";
 import { useState } from 'react';
 
-export default function Notes() {
+export default function Contact() {
   const [open, setOpen] = useState(false);
   const [taskInput, setTaskInput] = useState('');
   const [tasks, setTasks] = useState([]);
@@ -28,7 +27,7 @@ export default function Notes() {
 
   return (
     <div>
-      <img onClick={handleOpen} className='cursor-pointer w-9 pt-7 pl-3' src={taskss} title='tasks' alt="" />
+      <img onClick={handleOpen} className='cursor-pointer w-9 pt-7 pl-3' src={contact} title='contact' alt="" />
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,9 +36,9 @@ export default function Notes() {
       >
         <Box className="absolute md:top-[50%] -translate-x-[50%] -translate-y-[50%] md:left-[93%] p-[1vw] bg-white w-[14vw] min-h-[700px] shadow-2xl ">
           <Typography className='text-gray-500 font-semibold'>
-            Add Tasks
+            Add Contacts
           </Typography>
-          <input onChange={(e) => setTaskInput(e.target.value)} placeholder='📝tasks' className='border border-black rounded-md p-1 mt-2' />
+          <input onChange={(e) => setTaskInput(e.target.value)} placeholder='📞contact' className='border border-black rounded-md p-1 mt-2' />
           <div className='flex gap-4 mt-4'>
             <button onClick={addTask} className='bg-blue-500 p-2 rounded-md ml-12 hover:bg-blue-600 hover:text-white pl-6 pr-6'>Add</button>
           </div>
