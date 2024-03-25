@@ -115,6 +115,7 @@ const deleteMail=async(data)=>{
               </>
             );
           })}
+          <p className=" left-1/2 fixed bottom-16">Privacy policy . Terms of service</p>
     </div>
   );
 };
