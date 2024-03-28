@@ -7,6 +7,7 @@ import { auth, googelprovider } from '../firebase/setup';
 import { signOut } from 'firebase/auth';
 import { LuLogOut } from "react-icons/lu";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const style = {
@@ -33,6 +34,7 @@ const Profile=()=> {
     try {
       await signOut(auth,googelprovider);
       auth.currentUser===null&&navigate("/");
+      toast.success("Logged Out Successfully")
       
     } catch (error) {
       console.log(error);
