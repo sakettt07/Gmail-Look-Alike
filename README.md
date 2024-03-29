@@ -1,15 +1,14 @@
                                           Gmail- Clone
 Building a gmail clone with the proper functional working of the exact gmail its not an UI clone.
 
-Tech Stack Used-
-      ReactJS
-      Tailwind Css
-      Firebase (Virtual Database)
--- Helper Library :
-      Material UI
-      React Icons
-      React-Router-Dom
-      React-Toastify
+![image](https://github.com/sakettt07/Gmail-Look-Alike/assets/127855345/98d52e3d-5345-4d6e-88d3-2931898f2ea0)
+
+![image](https://github.com/sakettt07/Gmail-Look-Alike/assets/127855345/fbc59963-06de-4f62-b17b-617b4afd1cf0)
+
+
+
+
+
 
 
 Here are some screenshots attached:
@@ -20,8 +19,5 @@ Here are some screenshots attached:
 ![image](https://github.com/sakettt07/Gmail-Look-Alike/assets/127855345/ea809fbf-a034-4993-b9f0-21f5dffd4a8b)
 ![image](https://github.com/sakettt07/Gmail-Look-Alike/assets/127855345/bcf83e4a-44c8-4d72-88a3-829371949291)
 
-
-The Below Image describes the Mobile responsive view of the project.
-![image](https://github.com/sakettt07/Gmail-Look-Alike/assets/127855345/5011ec09-d6d9-4b23-9ab5-fdda0d72e9b4)
 
 
