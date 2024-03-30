@@ -1,6 +1,5 @@
-import * as React from 'react';
+import  React, {useState} from 'react';
 import Box from '@mui/material/Box';
-// import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import img2 from "../assets/images/user.png";
 import { auth, googelprovider } from '../firebase/setup';
@@ -10,24 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
-const style = {
-  position: 'absolute',
-  top: '37%',
-  left: '82%',
-  transform: 'translate(-50%, -50%)',
-  width: "28vw",
-  height: "23vw",
-  bgcolor: '#d5e4f9',
-  border: '1px solid #23617d',
-  boxShadow: 20,
-  borderRadius:"29px",
-  p: 4,
-};
 
 const Profile=()=> {
   const navigate=useNavigate();
   
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSignout=async()=>{

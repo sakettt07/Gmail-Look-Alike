@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { IoMenu, IoClose } from "react-icons/io5";
+import React from 'react';
 import img1 from "../assets/images/logo.png";
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { MdOutlineStarRate } from "react-icons/md";
 import { GrFormRefresh } from "react-icons/gr";
-import { TbClock } from "react-icons/tb";
+import { TbClock, TbRulerMeasure } from "react-icons/tb";
 
 import { PiStarFill } from "react-icons/pi";
 import {
@@ -19,24 +19,23 @@ const Center = (props) => {
   const [maildata, setMaildata] = useState([]);
   const [hoveredItem, setHoveredItem] = useState(null);
 
-  const moveMailToBin = async (data) => {
-    const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
-    const binCollection = collection(userDoc, "Bin");
-    try {
-      await setDoc(doc(binCollection), { ...data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const deleteMail = async (data) => {
     const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
-    const messageDoc = doc(userDoc, "Inbox", `${data.id}`);
+    const messageDoc = doc(userDoc, "Bin", `${data.id}`);
+    const deleteDocc=doc(userDoc,"Inbox",`${data.id}`);
     try {
-      await moveMailToBin(data);
-      await deleteDoc(messageDoc);
-      toast.success("Mail deleted refresh page");
-      console.log("mail is deltedd");
+      await deleteDoc(deleteDocc);
+      await setDoc(messageDoc, {
+        email: data.email,
+        sender: data.sender,
+      });
+      toast('Mail Added to Bin!', {
+        position: "bottom-left",
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        });
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +79,9 @@ const Center = (props) => {
   const snoozed = async (data) => {
     const userDoc = doc(database, "Users", `${auth.currentUser?.email}`);
     const messageDoc = doc(userDoc, "Snoozed", `${data.id}`);
+    const snoozeDoc=doc(userDoc,"Inbox",`${data.id}`);
     try {
+      await deleteDoc(snoozeDoc);
       await setDoc(messageDoc, {
         email: data.email,
         sender: data.sender,
@@ -91,7 +92,7 @@ const Center = (props) => {
   };
 
   return (
-    <div className="bg-zinc-300 overflow-y-auto min-h-[100vh] md:min-h-[82vh] rounded-2xl w-full p-5">
+    <div className="bg-zinc-200 overflow-y-auto min-h-[100vh] md:min-h-[82vh] rounded-2xl w-full p-5">
       <GrFormRefresh className="text-[24px] ml-3 mb-2 text-gray-500 hover:bg-gray-300 hover:rounded-xl" />
       {props.search
         ? maildata

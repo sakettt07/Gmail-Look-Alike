@@ -16,7 +16,7 @@ const Signin = () => {
     if (userSignedIn) {
       const timeout = setTimeout(() => {
         navigate("/home");
-      }, 3100);
+      }, 2400);
 
       return () => clearTimeout(timeout);
     }
