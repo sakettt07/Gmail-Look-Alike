@@ -1,6 +1,5 @@
 import  React, {useState} from "react";
 import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { HiPencil } from "react-icons/hi";
@@ -8,6 +7,7 @@ import { TextField } from "@mui/material";
 import { addDoc, collection, doc } from "firebase/firestore";
 import { database } from "../firebase/setup";
 import { auth } from "../firebase/setup";
+import { toast } from "react-toastify";
 
 
 export default function Message() {
@@ -28,7 +28,7 @@ export default function Message() {
         await addDoc(messageRef,{
             email:message,
         });
-        setMessage("");
+        handleClose();
     } catch (error) {
         console.log(error);
     }
@@ -36,6 +36,8 @@ export default function Message() {
 
   // the below function will save the mail for the sender in inbox collection
   const inbox=async()=>{
+    setMessage("");
+    setMail("");
     const userDoc=doc(database,"Users",`${mail}`);
     const messageRef=collection(userDoc,"Inbox")
     try {
@@ -43,9 +45,14 @@ export default function Message() {
             email:message,
             sender:auth.currentUser?.displayName,
         });
-        setMail("");
-        setMessage("");
-        send()
+        toast('Mail sent', {
+          position: "bottom-left",
+          autoClose: 1300,
+          closeOnClick: true,
+          theme: "dark",
+          });
+       
+        send();
     } catch (error) {
         console.log(error);
     }
