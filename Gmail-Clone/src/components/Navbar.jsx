@@ -1,14 +1,17 @@
 import React from 'react';
 import img1 from "../assets/images/logo.png";
-import { RxQuestionMarkCircled } from "react-icons/rx";
+// import { RxQuestionMarkCircled } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
-import { CgMenuGridO } from "react-icons/cg";
+
 import { IoMdSearch } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { auth } from '../firebase/setup';
 import "./Navbar.css";
 import Profile from './Profile';
 import { useNavigate } from "react-router-dom";
+// import { GrCircleInformation } from "react-icons/gr";
+import Info from "./Info"
+import Explore from './Explore';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
@@ -28,9 +31,9 @@ const Navbar = (props) => {
         <input onChange={(e) => props.setSearch(e.target.value)} type="text" placeholder='Search mail' className='bg-[#eaf1fb] p-3 rounded-full pl-12 text-[18px] w-[40vw]' />
       </div>
       <div className='flex items-center gap-3 mr-3'>
-        <RxQuestionMarkCircled title='Support' className='text-[25px] hidden md:flex cursor-pointer font-semibold text-[#5f6368]' />
+        <Info />
         <IoSettingsOutline title='Settings' className='text-[25px] hidden md:flex cursor-pointer font-semibold text-[#5f6368]' />
-        <CgMenuGridO title='Explore more' className='text-[28px] hidden md:flex cursor-pointer font-semibold text-[#5f6368]' />
+        <Explore />
         {auth.currentUser ? (
           <Profile />
         ) : (

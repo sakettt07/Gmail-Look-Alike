@@ -64,7 +64,6 @@ export default function Message() {
         <HiPencil className="text-[25px]" />
         <h3 className="font-semibold text-[15px]">Compose</h3>
       </div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={open}
         onClose={handleClose}

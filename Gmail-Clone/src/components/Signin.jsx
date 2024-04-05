@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 import "./Signin.css";
 import img from "../assets/images/logo.png";
 import img2 from "../assets/images/google.png";
@@ -7,6 +7,8 @@ import { googelprovider, auth, database } from "../firebase/setup";
 import { toast } from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import { setDoc,doc } from "firebase/firestore";
+import { useState,useEffect } from "react";
+
 
 const Signin = () => {
   const navigate=useNavigate();
@@ -46,6 +48,9 @@ const Signin = () => {
       console.log(error);
     }
   };
+
+
+
 
   return (
     <>
