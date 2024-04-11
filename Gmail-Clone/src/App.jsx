@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import { useState, useEffect } from "react";
 import Loader from "./components/Loader";
 import Error from "./components/Error";
+import MailDetail from "./components/MailDetail";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,7 @@ function App() {
             element={authenticated ? <Navigate to="/home" /> : <Signin />}
           />
           <Route path="/home" element={<Home />} />
+          <Route path="/mail/:id" element={<MailDetail />} />
 
           <Route path="*" element={<Error />} />
         </Routes>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import { MdOutlineStarRate } from "react-icons/md";
 import { GrFormRefresh } from "react-icons/gr";
-import { TbClock, TbRulerMeasure } from "react-icons/tb";
-
+import { TbClock } from "react-icons/tb";
+import {useNavigate} from "react-router-dom"
 import { PiStarFill } from "react-icons/pi";
 import {
   collection,
@@ -18,6 +17,7 @@ import { toast } from "react-toastify";
 const Center = (props) => {
   const [maildata, setMaildata] = useState([]);
   const [hoveredItem, setHoveredItem] = useState(null);
+  const navigate=useNavigate();
 
 
   const deleteMail = async (data) => {
@@ -102,6 +102,7 @@ const Center = (props) => {
                 <>
                   <div
                     key={index}
+                    onClick={()=>navigate(`/mail/${data.id}`)}
                     onMouseEnter={() => setHoveredItem(index)}
                     onMouseLeave={() => setHoveredItem(null)}
                     className=" flex justify-between items-center gap-4 border-b-2 hover:border hover:shadow-lg p-2"
@@ -124,7 +125,7 @@ const Center = (props) => {
                     <h4 className="text-[16px]  md:text-[17px] font-semibold">
                       {data.sender}
                     </h4>
-                    <p className="pl-10  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
+                    <p className="pl-10 truncate  text-[12px] md:text-[18px] md:pl-16 text-gray-500">
                       {data.email}
                     </p>
                     <MdOutlineDeleteOutline
@@ -148,6 +149,7 @@ const Center = (props) => {
               <>
                 <div
                   key={index}
+                  onClick={()=>navigate(`/mail/${data.id}`)}
                   onMouseEnter={() => setHoveredItem(index)}
                   onMouseLeave={() => setHoveredItem(null)}
                   className=" flex  items-center gap-4 border-b-2 hover:border hover:shadow-lg p-2"
@@ -170,7 +172,7 @@ const Center = (props) => {
                   <h4 className="text-[16px] md:text-[17px] font-semibold">
                     {data.sender}
                   </h4>
-                  <p className="pl-10 text-[12px] md:text-[18px] md:pl-16 text-gray-500">
+                  <p className="pl-10 truncate text-[12px] md:text-[18px] md:pl-16 text-gray-500">
                     {data.email}
                   </p>
                   <MdOutlineDeleteOutline
